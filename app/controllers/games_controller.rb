@@ -4,11 +4,13 @@ require 'json'
 class GamesController < ApplicationController
 
     def new
-        @letters = []
-        # @letter = ""
-        10.times do
-            @letters << ('A'..'Z').to_a.sample
-        end
+        # @letters = []
+        # 10.times do
+        #     @letters << ('A'..'Z').to_a.sample
+        # end
+
+
+        @letters = ('A'..'Z').to_a.sample(10)
 
     end
 
