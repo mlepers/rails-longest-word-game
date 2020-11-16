@@ -8,9 +8,10 @@ class GamesController < ApplicationController
         # 10.times do
         #     @letters << ('A'..'Z').to_a.sample
         # end
-
-
-        @letters = ('A'..'Z').to_a.sample(10)
+        @letters = ('A'..'Z').to_a.sample(8)
+        2.times do
+          @letters << ['A', 'E', 'I', 'O', 'U', 'Y'].sample
+        end
 
     end
 
@@ -29,19 +30,29 @@ class GamesController < ApplicationController
         @the_grid = params[:grid].chars.sort
 
        @condition_grid = compare_grid_and_word(@the_grid, @my_word)
+       @scoring = @api_result.length
 
         if @condition_grid && @api_result['found']
-            @score = "is a good word (english and in the grid)."
+            @score = "is a good word (english and in the grid). Your score is #{@api_result['length']}. "
             @message = "Good Job,"
+            @score = @api_result['length']
         elsif !@condition_grid && !@api_result['found']
             @score = "is not an english word and not in the grid"
             @message = "Sorry"
+            @score = 0
         else
             @score ="is not in the grid"
-             @message = "Sorry"
+            @message = "Sorry"
+            @score = 0
         end
 
+        session["score"] == nil ? session["score"] = @score : session["score"] += @score
+
+        @session_score = session["score"]
+
     end
+
+
 
 
     def compare_grid_and_word(grid, attempt)
@@ -56,6 +67,12 @@ class GamesController < ApplicationController
         end
 
         return true
+      end
+
+
+      def start_new_session
+        session.delete(:score)
+        new_path
       end
 
 

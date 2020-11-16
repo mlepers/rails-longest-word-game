@@ -1,11 +1,11 @@
 
 <h2>Result</h2>
 
-<p><%=@message%> <strong><%=@word%></strong> <%= @score%></p>
+<p><%=@message%> <strong><%=@word%></strong> : score : <%= @score%></p>
+Your score of all your games : <%= @session_score %>
 
-
- <div>
-    <%= link_to "Play again!", new_path %>
+<div>
+  <%= link_to "Play again!", new_path %>
 </div>
 
 
@@ -13,4 +13,4 @@
 
 
 
-
+<% console %>
