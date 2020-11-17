@@ -1,0 +1,8 @@
+<h2>Final Score : </h2>
+<%= session[:score]  %>
+
+<% session.delete(:score) %>
+
+<div>
+  <%= link_to "New game!", new_path %>
+</div>

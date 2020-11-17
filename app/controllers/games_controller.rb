@@ -70,10 +70,5 @@ class GamesController < ApplicationController
       end
 
 
-      def start_new_session
-        session.delete(:score)
-        new_path
-      end
-
 
 end
